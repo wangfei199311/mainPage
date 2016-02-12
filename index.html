@@ -74,6 +74,65 @@
 		document.getElementById("ps").style.display="none";
 		document.getElementById("nz").style.display="none";
 	}
+	
+	 function AutoScroll(){
+	var scroll = $(".promo ul");
+	//ul往左边移动300px
+	scroll.animate({marginLeft:"-1292px"},1000,function(){
+		//把第一个li丢最后面去
+		scroll.css({marginLeft:'8px'}).find("li:first").appendTo(scroll);
+	});
+	}
+
+	 $(function(){
+	//两秒后调用
+	var scrolling=setInterval("AutoScroll()",2000);
+	$(".promo ul").hover(function(){
+		//鼠标移动DIV上停止
+		clearInterval(scrolling);
+	},function(){
+		//离开继续调用
+		scrolling=setInterval("AutoScroll()",2000);
+	});
+	$(".promo i").hover(function(){
+		//鼠标移动DIV上停止
+		clearInterval(scrolling);
+	},function(){
+		//离开继续调用
+		scrolling=setInterval("AutoScroll()",2000);
+	});
+});
+ $(function(){
+  	var tNum=0; //图数目
+
+/*
+   eq(0)过滤选择器，选第一张图片，克隆复制。append((要插入的节点)添加节点操作到最后
+  	*/
+  	
+  	/*右按钮，跳到下一张图
+  	animate(参数,时间)---动态的css*/
+  	$('.right').click(function(event){
+  		tNum++;  	
+  	    $('.promo ul').append($('.promo ul li').eq(0).clone(true))  
+
+  		if (tNum>4) {
+  			tNum=1;
+  			$('.promo ul').css('left','0px')
+  		};
+  		var move=tNum*-1300-8;
+  		$('.promo ul').animate({'left':''+move+'px'},500)
+  	})
+  	$('.left').click(function(event){
+  		tNum--;
+  		$('.promo ul').append($('.promo ul li').eq(0).clone(true)) 
+  		if (tNum<0) {
+  			tNum=3;
+  			$('.promo ul').css('left',' -6500px')
+  		};
+  		var move=tNum*-1300-8;
+  		$('.promo ul').animate({'left':''+move+'px'},500)
+  	})
+  })
 </script>
 <body >
 <div id="main">
@@ -92,17 +151,19 @@
         	<a href="#">爱自己.护肤</a>
     	</p>
 	</div>
-	<div id="demo">
-		<div id="indemo">
-			<div id="demo1">
-			<a href="#"><img src="images/a5b8091a1c436faae50500fed4a13727.jpg" border="0" /></a>
-			<a href="#"><img src="images/a43440d419d34f3a8c8395041a9bd9.jpg" border="0" /></a>
-			<a href="#"><img src="images/bg_hanrancream.jpg" border="0" /></a>
-			<a href="#"><img src="images/531e6c20a8ab4c4585a85334de979a2d.jpg" border="0" /></a>
-			</div>
-			<div id="demo2"></div>
-		</div>
+
+	<div class="promo">
+		<ul>
+			<li><a href="#"><img src="images/a5b8091a1c436faae50500fed4a13727.jpg"width="1300px" height="460px" ></a></li>
+			<li><a href="#"><img src="images/a43440d419d34f3a8c8395041a9bd9.jpg"width="1300px" height="460px" ></a></li>
+			<li><a href="#"><img src="images/bg_hanrancream.jpg"width="1300px" height="460px" ></a></li>
+			<li><a href="#"><img src="images/531e6c20a8ab4c4585a85334de979a2d.jpg"width="1300px" height="460px" ></a></li>
+		</ul>
+		<i class="left" style="left:10px;"></i>
+		<i class="right" style="right:10px;"></i>
 	</div>
+
+
 	<div class="content">
 		<div id="top10">
 			<span class="t1"><STRONG>TOP4</STRONG></span><span class="t2"> 畅销产品</span>

@@ -77,7 +77,7 @@
 	
 	 function AutoScroll(){
 	var scroll = $(".promo ul");
-	//ul往左边移动300px
+	//ul往左边移动
 	scroll.animate({marginLeft:"-1292px"},1000,function(){
 		//把第一个li丢最后面去
 		scroll.css({marginLeft:'8px'}).find("li:first").appendTo(scroll);
@@ -104,6 +104,7 @@
 });
  $(function(){
   	var tNum=0; //图数目
+  	$('.promo ul').append($('.promo ul li').eq(0).clone(true))  
 
 /*
    eq(0)过滤选择器，选第一张图片，克隆复制。append((要插入的节点)添加节点操作到最后
@@ -113,7 +114,6 @@
   	animate(参数,时间)---动态的css*/
   	$('.right').click(function(event){
   		tNum++;  	
-  	    $('.promo ul').append($('.promo ul li').eq(0).clone(true))  
 
   		if (tNum>4) {
   			tNum=1;
@@ -124,7 +124,6 @@
   	})
   	$('.left').click(function(event){
   		tNum--;
-  		$('.promo ul').append($('.promo ul li').eq(0).clone(true)) 
   		if (tNum<0) {
   			tNum=3;
   			$('.promo ul').css('left',' -6500px')
